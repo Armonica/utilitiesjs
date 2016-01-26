@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
+        "target": "es6",
         "isolatedModules": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
@@ -22,14 +21,15 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-      "./src/index.ts",
-      "./src/arrays.ts",
-      "./src/objects.ts",
-      "./src/promises.ts",
-      "./src/html.ts",
-      "./src/utils.ts",
-      "./src/strings.ts",
-      "./src/request.ts",
-      "./src/debug.ts"
+        "./src/arrays.ts",
+        "./src/debug.ts",
+        "./src/html.ts",
+        "./src/index.ts",
+        "./src/objects.ts",
+        "./src/promises.ts",
+        "./src/request.ts",
+        "./src/strings.ts",
+        "./src/tmp/utils.d.ts",
+        "./src/utils.ts"
     ]
 }

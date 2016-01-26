@@ -1,15 +1,12 @@
-
-
 export function camelcase(input) {
   return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
     return group1.toUpperCase();
   });
-};
+}
 
 export function truncate(str:string, length: number): string {
-   let n = str.substring(0, Math.min(length,str.length))
-
-   return n + (n.length == str.length ? '' : '...')
+   let n = str.substring(0, Math.min(length,str.length));
+   return n + (n.length == str.length ? '' : '...');
 }
 
 export function humanFileSize(bytes:number, si:boolean = false): string {

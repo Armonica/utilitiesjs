@@ -4,36 +4,36 @@ export class Debug {
     static enable (enabled:boolean, namespace?:string) {
       for (let k in this.loggers) {
         if (namespace && k === namespace) {
-          this.loggers[k].enabled = enabled
+          this.loggers[k].enabled = enabled;
         } else if (!namespace) {
-          this.loggers[k].enabled = enabled
+          this.loggers[k].enabled = enabled;
         }
       }
     }
-    static loggers: {[key:string]: Debug} = {}
+    static loggers: {[key:string]: Debug} = {};
     static formatters: {[key:string]: (args:any) => string } = {
       j: function (args:any) {
         return JSON.stringify(args);
       }
-    }
+    };
     
     static create(namespace:string): (...args:any[]) => void {
-      let logger
+      let logger;
       if (this.loggers[namespace]) {
-         logger = this.loggers[namespace].debug
+         logger = this.loggers[namespace].debug;
       } else {
         logger = new Debug(namespace);
-        this.loggers[namespace] = logger  
+        this.loggers[namespace] = logger  ;
       }
       
-      return bind(logger.debug, logger)
+      return bind(logger.debug, logger);
     }
     
-    enabled:boolean = false
-    prefix: string
-    namespace:string
+    enabled:boolean = false;
+    prefix: string;
+    namespace:string;
     constructor(namespace:string) {
-      this.namespace = namespace
+      this.namespace = namespace;
     }
     
     debug (...args:any[]) {
@@ -90,5 +90,6 @@ export class Debug {
   }
   
   export function debug(namespace:string): (...args:any[]) => void {
-    return Debug.create(namespace)
+    return Debug.create(namespace);
   }
+  

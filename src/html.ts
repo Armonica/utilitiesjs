@@ -1,5 +1,5 @@
 
-import {indexOf, unique} from './arrays'
+import {indexOf, unique} from './arrays';
 var ElementProto: any = (typeof Element !== 'undefined' && Element.prototype) || {};
 
 var matchesSelector = ElementProto.matches ||
@@ -19,18 +19,18 @@ var elementRemoveEventListener = ElementProto.removeEventListener || function(ev
 }
 
 const transitionEndEvent = (function transitionEnd() {
-  var el = document.createElement('bootstrap')
+  var el = document.createElement('bootstrap');
 
   var transEndEventNames = {
     'WebkitTransition': 'webkitTransitionEnd',
     'MozTransition': 'transitionend',
     'OTransition': 'oTransitionEnd otransitionend',
     'transition': 'transitionend'
-  }
+  };
 
   for (var name in transEndEventNames) {
     if (el.style[name] !== undefined) {
-      return transEndEventNames[name]
+      return transEndEventNames[name];
     }
   }
 
@@ -38,42 +38,42 @@ const transitionEndEvent = (function transitionEnd() {
 });
 
 const animationEndEvent = (function animationEnd() {
-  var el = document.createElement('bootstrap')
+  var el = document.createElement('bootstrap');
 
   var transEndEventNames = {
     'WebkitAnimation': 'webkitAnimationEnd',
     'MozAnimation': 'animationend',
     'OAnimation': 'oAnimationEnd oanimationend',
     'animation': 'animationend'
-  }
+  };
 
   for (var name in transEndEventNames) {
     if (el.style[name] !== undefined) {
-      return transEndEventNames[name]
+      return transEndEventNames[name];
     }
   }
 
-  return null
+  return null;
 });
 
 
 export function matches(elm, selector): boolean {
-  return matchesSelector.call(elm, selector)
+  return matchesSelector.call(elm, selector);
 }
 
 export function addEventListener(elm: Element, eventName: string, listener, useCap: boolean = false) {
-  elementAddEventListener.call(elm, eventName, listener, useCap)
+  elementAddEventListener.call(elm, eventName, listener, useCap);
 }
 
 export function removeEventListener(elm: Element, eventName: string, listener) {
-  elementRemoveEventListener.call(elm, eventName, listener)
+  elementRemoveEventListener.call(elm, eventName, listener);
 }
 
 const unbubblebles = 'focus blur change'.split(' ');
 let domEvents = [];
 
 export function delegate(elm: HTMLElement | string, selector: string, eventName: string, callback, ctx?): Function {
-  let root = elm
+  let root = elm;
   let handler = function(e) {
     let node = e.target || e.srcElement;
 
@@ -125,7 +125,7 @@ export function addClass(elm: HTMLElement, className: string) {
       elm.classList.add(split[i].trim());
     }
   } else {
-    elm.className = unique(elm.className.split(' ').concat(className.split(' '))).join(' ')
+    elm.className = unique(elm.className.split(' ').concat(className.split(' '))).join(' ');
   }
 }
 export function removeClass(elm: HTMLElement, className: string) {
@@ -137,11 +137,11 @@ export function removeClass(elm: HTMLElement, className: string) {
   } else {
     let split = elm.className.split(' '),
       classNames = className.split(' '),
-      tmp = split, index
+      tmp = split, index;
 
     for (let i = 0, ii = classNames.length; i < ii; i++) {
-      index = split.indexOf(classNames[i])
-      if (!!~index) split = split.splice(index, 1)
+      index = split.indexOf(classNames[i]);
+      if (!!~index) split = split.splice(index, 1);
     }
   }
 }
@@ -150,8 +150,8 @@ export function hasClass(elm: HTMLElement, className: string) {
   if (elm.classList) {
     return elm.classList.contains(className);
   }
-  var reg = new RegExp('\b' + className)
-  return reg.test(elm.className)
+  var reg = new RegExp('\b' + className);
+  return reg.test(elm.className);
 }
 
 export function selectionStart(elm: HTMLInputElement): number {
@@ -196,19 +196,19 @@ export const domReady = (function() {
     , doc = document
     , hack = (<any>doc.documentElement).doScroll
     , domContentLoaded = 'DOMContentLoaded'
-    , loaded: boolean = (hack ? /^loaded|^c/ : /^loaded|^i|^c/).test(doc.readyState)
+    , loaded: boolean = (hack ? /^loaded|^c/ : /^loaded|^i|^c/).test(doc.readyState);
 
 
   if (!loaded) {
     doc.addEventListener(domContentLoaded, listener = function() {
-      doc.removeEventListener(domContentLoaded, listener)
+      doc.removeEventListener(domContentLoaded, listener);
       loaded = true
 
-      while (listener = fns.shift()) listener()
+      while (listener = fns.shift()) listener();
     })
   }
 
   return function(fn) {
-    loaded ? setTimeout(fn, 0) : fns.push(fn)
+    loaded ? setTimeout(fn, 0) : fns.push(fn);
   }
 });

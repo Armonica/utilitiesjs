@@ -1,7 +1,7 @@
-import {has, isObject, extend} from './objects'
-import {flatten, slice} from './arrays'
-import {camelcase} from './strings'
-var idCounter = 0
+import {has, isObject, extend} from './objects';
+import {flatten, slice} from './arrays';
+import {camelcase} from './strings';
+var idCounter = 0;
 const nativeBind = Function.prototype.bind;
 
 export function ajax (): XMLHttpRequest {
@@ -25,7 +25,7 @@ export function ajax (): XMLHttpRequest {
         e = _error;
     }
     return e;
-};
+}
 
 
 
@@ -34,7 +34,7 @@ export function ajax (): XMLHttpRequest {
  * @return {string}
  */
 export function uniqueId(prefix = ''): string {
-  return prefix + (++idCounter)
+  return prefix + (++idCounter);
 }
 
 
@@ -48,23 +48,23 @@ export function proxy(from, to, fns) {
 }
 
 export function bind<T extends Function>(method: T, context: any, ...args: any[]): T {
-  if (typeof method !== 'function') throw new Error('method not at function')
+  if (typeof method !== 'function') throw new Error('method not at function');
 
-  if (nativeBind != null) return nativeBind.call(method, context, ...args)
+  if (nativeBind != null) return nativeBind.call(method, context, ...args);
 
-  args = args || []
+  args = args || [];
 
-  let fnoop = function() { }
+  let fnoop = function() { };
 
   let fBound = function() {
-    let ctx = this instanceof fnoop ? this : context
-    return callFunc(method, ctx, args.concat(slice(arguments)))
-  }
+    let ctx = this instanceof fnoop ? this : context;
+    return callFunc(method, ctx, args.concat(slice(arguments)));
+  };
 
-  fnoop.prototype = this.prototype
-  fBound.prototype = new fnoop()
+  fnoop.prototype = this.prototype;
+  fBound.prototype = new fnoop();
 
-  return <any>fBound
+  return <any>fBound;
 }
 
 export function callFunc(fn: Function, ctx: any, args: any[] = []): any {
@@ -80,7 +80,7 @@ export function callFunc(fn: Function, ctx: any, args: any[] = []): any {
     case 4:
       return fn.call(ctx, args[0], args[1], args[2], args[3]);
     case 5:
-      return fn.call(ctx, args[0], args[1], args[2], args[3], args[4])
+      return fn.call(ctx, args[0], args[1], args[2], args[3], args[4]);
     default:
       return fn.apply(ctx, args);
   }
@@ -90,29 +90,29 @@ export function callFunc(fn: Function, ctx: any, args: any[] = []): any {
 
 
 export function equal(a: any, b: any): boolean {
-  return eq(a, b, [], [])
+  return eq(a, b, [], []);
 }
 
 export function triggerMethodOn(obj: any, eventName: string, args?: any[]) {
 
-  let ev = camelcase("on-" + eventName.replace(':', '-'))
+  let ev = camelcase("on-" + eventName.replace(':', '-'));
 
 
   if (obj[ev] && typeof obj[ev] === 'function') {
 
-    callFunc(obj[ev], obj, args)
+    callFunc(obj[ev], obj, args);
   }
 
   if (typeof obj.trigger === 'function') {
-    args = [eventName].concat(args)
-    callFunc(obj.trigger, obj, args)
+    args = [eventName].concat(args);
+    callFunc(obj.trigger, obj, args);
   }
 }
 
 export function getOption(option: string, objs: any[]): any {
 
   for (let o of objs) {
-    if (isObject(o) && o[option]) return o[option]
+    if (isObject(o) && o[option]) return o[option];
   }
 
   return null
@@ -156,7 +156,7 @@ export const nextTick = (function() {
   var canPost = typeof window !== 'undefined'
     && window.postMessage && window.addEventListener;
   if (canSetImmediate) {
-    return function(f) { return window.setImmediate(f) };
+    return function(f) { return window.setImmediate(f); };
   }
   if (canPost) {
     var queue = [];
@@ -268,4 +268,4 @@ function eq(a, b, aStack, bStack): boolean {
   aStack.pop();
   bStack.pop();
   return result;
-};
+}

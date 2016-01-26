@@ -1,4 +1,3 @@
-
 import {equal} from './utils';
 
 // Return a new array with duplicates removed
@@ -67,3 +66,4 @@ export function sortBy<T>(obj: T[], value: string|Function, context?: any): T[] 
         return item.value;
       });
   }
+  

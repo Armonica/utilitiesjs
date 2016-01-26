@@ -1,24 +1,24 @@
-import {equal, callFunc} from './utils'
-import {any} from './arrays'
+import {equal, callFunc} from './utils';
+import {any} from './arrays';
 
 export function isObject(obj: any): boolean {
   return obj === Object(obj);
 }
 
 export function isEmpty(obj:any): boolean {
-  return Object.keys(obj).length === 0
+  return Object.keys(obj).length === 0;
 }
 
 export function extend(obj: Object, ...args: Object[]): any {
-  if (!isObject(obj)) return obj
-  let o, k
+  if (!isObject(obj)) return obj;
+  let o, k;
   for (o of args) {
-    if (!isObject(o)) continue
+    if (!isObject(o)) continue;
     for (k in o) {
-      if (has(o, k)) obj[k] = o[k]
+      if (has(o, k)) obj[k] = o[k];
     }
   }
-  return obj
+  return obj;
 }
 
 export function assign(target: any, ...args: any[]) {
@@ -47,29 +47,29 @@ export function assign(target: any, ...args: any[]) {
 }
 
 export function has(obj, prop): boolean {
-  return Object.prototype.hasOwnProperty.call(obj, prop)
+  return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
 export function pick(obj: Object, props: string[]): any {
-  let out = {}, prop
+  let out = {}, prop;
   for (prop of props) {
-    if (has(obj, prop)) out[prop] = obj[prop]
+    if (has(obj, prop)) out[prop] = obj[prop];
   }
-  return out
+  return out;
 }
 
 export function result(obj: any, prop: string, ctx?: any, args?: any[]): any {
-  let ret = obj[prop]
-  return (typeof ret === 'function') ? callFunc(ret, ctx, args || []) : ret
+  let ret = obj[prop];
+  return (typeof ret === 'function') ? callFunc(ret, ctx, args || []) : ret;
 
 }
 
 export function values<T>(obj: Object): T[] {
-  let output = []
+  let output = [];
   for (let k in obj) if (has(obj, k)) {
-    output.push(obj[k])
+    output.push(obj[k]);
   }
-  return output
+  return output;
 }
 
 function intersectionObjects(a, b, predicate) {

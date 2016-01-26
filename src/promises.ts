@@ -1,13 +1,14 @@
-
-import {isObject} from './objects'
-import {slice, flatten} from './arrays'
-import {callFunc, nextTick} from './utils'
+import {isObject} from './objects';
+import {slice, flatten} from './arrays';
+import {callFunc, nextTick} from './utils';
 
 export interface IPromise<T> extends Thenable<T> {
 
 }
+declare var global: any;
 
-export const Promise: PromiseConstructor = (typeof window === 'undefined') ? global.Promise : (<any>window).Promise;
+
+export const Promise: PromiseConstructor = (typeof window === 'undefined') ? (<any>global).Promise : (<any>window).Promise;
 
 export interface Thenable<R> {
     then<U>(onFulfilled?: (value: R) => U | Thenable<U>, onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
@@ -127,7 +128,7 @@ export function deferred<T>(fn?, ctx?, ...args: any[]): Deferred<T>|IPromise<T> 
 	});
 
 	if (typeof fn === 'function') {
-		callFunc(fn,ctx,args.concat([ret.done]))
+		callFunc(fn,ctx,args.concat([ret.done]));
 		return ret.promise;
 	}
 	return ret;
@@ -144,7 +145,7 @@ export function callback<T>(promise: IPromise<T>, callback: (error: Error, resul
 
 export function delay<T>(timeout?:number): IPromise<T> {
 	let defer: Deferred<T> = <Deferred<T>>deferred();
-	timeout == null ? nextTick(defer.resolve) : setTimeout(defer.resolve, timeout)
+	timeout == null ? nextTick(defer.resolve) : setTimeout(defer.resolve, timeout);
 	return defer.promise;
 };
 
@@ -152,7 +153,7 @@ export function delay<T>(timeout?:number): IPromise<T> {
 export function eachAsync<T>(array: T[], iterator: (value: T) => IPromise<void>, context?: any, accumulate = false): IPromise<void> {
 
   return mapAsync<T, void>(array, iterator, context, accumulate)
-    .then(function() { return void 0; })
+    .then(function() { return void 0; });
 
 }
 

@@ -1,5 +1,5 @@
-import {ajax} from './utils'
-import {IPromise, Promise, deferred, Deferred} from './promises'
+import {ajax} from './utils';
+import {IPromise, Promise, deferred, Deferred} from './promises';
   let xmlRe = /^(?:application|text)\/xml/,
       jsonRe = /^application\/json/,
       fileProto = /^file:/;
@@ -12,7 +12,7 @@ export interface Deferrable<U> {
 }
 
 export function queryParam ( obj ): string {
-  return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&')
+  return '?'+Object.keys(obj).reduce(function(a,k){a.push(k+'='+encodeURIComponent(obj[k]));return a},[]).join('&');
 }
 
 var isValid = function(xhr, url) {
@@ -20,15 +20,15 @@ var isValid = function(xhr, url) {
     return (xhr.status >= 200 && xhr.status < 300) ||
       (xhr.status === 304) ||
       (xhr.status === 0 && fileProto.test(url)) ||
-      (xhr.status === 0 && window.location.protocol === 'file:')
+      (xhr.status === 0 && window.location.protocol === 'file:');
   };
 
 export class Request {
 
-    private _xhr: XMLHttpRequest
-    private _data: any
+    private _xhr: XMLHttpRequest;
+    private _data: any;
     constructor (private _method: string, private _url: string) {
-      this._xhr = ajax()
+      this._xhr = ajax();
     }
 
     send (data:any): Request {
@@ -61,7 +61,7 @@ export class Request {
       data = this._data;
       let url = this._url;
       if (data && data === Object(data) /* && check for content-type */) {
-        let d = queryParam(data)
+        let d = queryParam(data);
         url += d
       }
 
@@ -79,13 +79,13 @@ export class Request {
 
       return this.end(data)
       .then<Object>((str) => {
-        let accepts = this._xhr.getResponseHeader('content-type')
+        let accepts = this._xhr.getResponseHeader('content-type');
 
         if (jsonRe.test(accepts) && str !== '') {
-          let json = JSON.parse(str)
+          let json = JSON.parse(str);
           return json
         } else {
-          throw new Error('json')
+          throw new Error('json');
         }
 
 
@@ -98,7 +98,7 @@ export class Request {
     }
 
     header (field: string, value: string): Request {
-      this._xhr.setRequestHeader(field,value)
+      this._xhr.setRequestHeader(field,value);
       return this
     }
   }
