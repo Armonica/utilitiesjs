@@ -1,15 +1,16 @@
+
 import {equal} from './utils';
 
 // Return a new array with duplicates removed
 export function unique(array: any[]): any[] {
-  return array.filter(function(e, i) {
+  return array && array.filter((e, i) => {
     for (i += 1; i < array.length; i += 1) {
       if (equal(e, array[i])) {
         return false;
       }
     }
     return true;
-  })
+  }) || [];
 }
 
 
