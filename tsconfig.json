@@ -15,21 +15,8 @@
     "exclude": [
         "node_modules"
     ],
-    "filesGlob": [
-        "./src/**/*.ts",
-        "./src/**/*.tsx",
-        "!./node_modules/**/*.ts"
-    ],
+    
     "files": [
-        "./src/arrays.ts",
-        "./src/debug.ts",
-        "./src/html.ts",
-        "./src/index.ts",
-        "./src/objects.ts",
-        "./src/promises.ts",
-        "./src/request.ts",
-        "./src/strings.ts",
-        "./src/tmp/utils.d.ts",
-        "./src/utils.ts"
+        "./src/index.ts"
     ]
 }

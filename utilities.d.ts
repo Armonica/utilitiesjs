@@ -1,10 +1,10 @@
 
 declare module "utilities" {
-	import tmp = require('utilities/lib/index')
-	export = tmp
+    import * as tmp from 'utilitiesjs/lib/index';
+	export = tmp;
 }
 
-declare module "utilities/lib/index" {
-	import tmp = require('lib/index')
-	export = tmp
+declare module "utilitiesjs/lib/index" {
+    import * as tmp from 'lib/index';
+	export = tmp;
 }
